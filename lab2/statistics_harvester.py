@@ -9,7 +9,6 @@ import csv
 MATRIX_SIZES  = [100, 250, 500, 1000, 1500, 2000, 3000, 5000]
 THREAD_COUNTS = [1, 2, 4, 8, 12, 16, 24, 32, 48]
 
-# Файлы для обмена данными с C++
 A_FILE      = "matrixA.txt"
 B_FILE      = "matrixB.txt"
 C_FILE      = "matrixC.txt"
@@ -80,10 +79,8 @@ def run_cpp(exec_name: str, threads: int) -> float:
 # ──────────────────────────────────────────────
 
 def main():
-    # 1. Компиляция
     exec_name = compile_cpp()
 
-    # 2. Подготовка CSV
     fieldnames = [
         "size_N",
         "threads",
@@ -95,13 +92,11 @@ def main():
     total = len(MATRIX_SIZES) * len(THREAD_COUNTS)
     done  = 0
 
-    # 3. Цикл экспериментов
     for N in MATRIX_SIZES:
         print(f"\n{'='*55}")
         print(f"  Размер матрицы: {N}x{N}")
         print(f"{'='*55}")
 
-        # Генерируем матрицы один раз для данного N
         A = np.random.uniform(-10, 10, (N, N))
         B = np.random.uniform(-10, 10, (N, N))
         save_matrix(A_FILE, A)
@@ -129,7 +124,6 @@ def main():
                     "time_cpp_ms":       None,
                 })
 
-    # 4. Запись CSV
     with open(RESULTS_CSV, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()

@@ -9,7 +9,6 @@
 
 using namespace std;
 
-// Функция для чтения матрицы из файла
 vector<double> readMatrix(const string& filename, int& N) {
     ifstream file(filename);
     if (!file.is_open()) {
@@ -24,13 +23,11 @@ vector<double> readMatrix(const string& filename, int& N) {
     return matrix;
 }
 
-// Функция для записи результата в файл
 void writeMatrix(const string& filename, const vector<double>& matrix, int N, double time_ms) {
     ofstream file(filename);
     if (!file.is_open()) {
         throw runtime_error("Не удалось создать файл: " + filename);
     }
-    // Выходные данные: объем задачи, время выполнения, значения
     file << N << "\n";
     file << time_ms << "\n";
     for (int i = 0; i < N; ++i) {
@@ -47,7 +44,6 @@ int main() {
     vector<double> A, B, C;
 
     try {
-        // Чтение исходных данных
         A = readMatrix("matrixA.txt", N_A);
         B = readMatrix("matrixB.txt", N_B);
 
@@ -66,7 +62,6 @@ int main() {
         }
         omp_set_num_threads(threads);
 
-        // Начало отсчета времени
         auto start = omp_get_wtime();
 
         // Перемножение матриц (порядок i-k-j для оптимизации кэша)
@@ -80,11 +75,9 @@ int main() {
             }
         }
 
-        // Конец отсчета времени
         auto end = omp_get_wtime();
         chrono::duration<double, milli> duration = chrono::duration<double, milli>(end - start);
 
-        // Запись результатов
         writeMatrix("matrixC.txt", C, N, duration.count());
 
         cout << "Успешно. Время выполнения: " << duration.count() << " мс. Объем: " << N << "x" << N << endl;
