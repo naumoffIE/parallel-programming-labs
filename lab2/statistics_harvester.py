@@ -118,7 +118,7 @@ def main():
                 rows.append({
                     "size_N":            N,
                     "threads":           T,
-                    "time_cpp_ms":       round(time_cpp,   2),
+                    "time_cpp_ms":       round(time_cpp,   7),
                 })
 
             except Exception as e:
