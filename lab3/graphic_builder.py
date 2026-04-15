@@ -28,7 +28,7 @@ for n in df['size_N'].unique():
     ax2.plot(subset['threads'], subset['speedup'], marker='s', label=f'N={n}')
 
 max_threads = df['threads'].max()
-ax2.plot([1, max_threads], [1, max_threads], color='red', linestyle='--', label='Идеал (S=p)')
+# ax2.plot([1, max_threads], [1, max_threads], color='red', linestyle='--', label='Идеал (S=p)')
 
 ax2.set_title('Коэффициент ускорения (Speedup)', fontsize=14)
 ax2.set_xlabel('Количество потоков')
