@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <iomanip>
 #include <cuda_runtime.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -184,6 +185,11 @@ double runCUDA(const vector<double>& A,
 //  Пример:    ./matmul_cuda 16 1
 // ──────────────────────────────────────────────
 int main(int argc, char* argv[]) {
+
+    SetConsoleCP(65001);
+    SetConsoleOutputCP(65001);
+
+
     int  blockSize = 16;
     bool tiled     = true;
 

@@ -14,8 +14,7 @@ C_FILE      = "matrixC.txt"
 RESULTS_CSV = "results.csv"
 
 # ── Путь к готовым результатам Лабы №1 ──────────────────────
-LAB1_CSV = r"D:/Dev/parallel programming/lab1/results.csv"
-
+LAB1_CSV = r"D:/Dev/parallel programming/lab1-single_thread/results.csv"
 
 def load_cpu_baseline(path: str) -> dict:
     if not os.path.isfile(path):
@@ -40,7 +39,7 @@ def load_cpu_baseline(path: str) -> dict:
 
 def compile_cuda(src: str = "main.cu", out: str = "matmul_cuda") -> str:
     exec_name = out + ".exe" if os.name == "nt" else out
-    flags = ["-O3", "-std=c++17", "--use_fast_math", "-arch=sm_75"]
+    flags = ["-O3", "-std=c++17", "-arch=sm_100"]
     cmd = ["nvcc"] + flags + [src, "-o", exec_name]
     print(f"[Компиляция] {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True)
