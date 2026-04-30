@@ -1,0 +1,25 @@
+#!/bin/bash
+#SBATCH --job-name=matmulMPI
+#SBATCH --time=0:05:00
+#SBATCH --ntasks-per-node=8
+#SBATCH --partition=batch
+#SBATCH --output=matmul_%j.log
+#SBATCH --error=matmul_%j.err
+
+module load intel/mpi4
+
+
+echo "======================================"
+echo "Задание: $SLURM_JOB_ID"
+echo "Узел: $SLURM_NODELIST"
+echo "Процессов: $SLURM_NTASKS"
+echo "Начало: $(date)"
+echo "======================================"
+
+mpirun -r ssh ./matmulMPI 2000
+
+echo ""
+echo "======================================"
+echo "Завершено: $(date)"
+echo "Результаты в файле: results_mpi.csv"
+echo "======================================"
